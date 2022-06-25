@@ -17,18 +17,20 @@ if ( !production ) {
     app.listen( PORT, () => console.log( "Running at " + PORT ) );
 }
 
-export default {
-    input: './src/index.js',
-    output: {
-        sourcemap: false,
-        format: 'esm',
-        name: 'workered',
-        file: './index.js'
-    },
-    plugins: [
-        resolve( { browser: true } ),
-        commonjs(),
-        production && terser()
-    ],
-    watch: { clearScreen: true }
-};
+export default [ 'index', 'utils' ].map( e => {
+    return {
+        input: `./src/${ e }.js`,
+        output: {
+            sourcemap: false,
+            format: 'esm',
+            name: 'workered',
+            file: `./${ e }.js`
+        },
+        plugins: [
+            resolve( { browser: true } ),
+            commonjs(),
+            production && terser()
+        ],
+        watch: { clearScreen: true }
+    }
+} );

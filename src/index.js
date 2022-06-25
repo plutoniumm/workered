@@ -1,15 +1,21 @@
-const defaultFunction = `
-export async function run( func = \"return 'Workered Working!'\" ) {
-	const eval2 = eval;
-	const data = await eval2( \`(async ()=>{${ func }})()\` );
-	return data;
-}`;
+import { function2string } from "./lib";
+
+export const runner = {
+	func: async function ( func = "return 1" ) {
+		const eval2 = eval;
+		const data = await eval2( `(async ()=>{${ func }})()` );
+		return data;
+	},
+	name: 'run'
+};
+
+const defaultFunction = `export ${ function2string( runner.func, runner.name ) }`;
 
 export default function workered ( code = defaultFunction, type = "classic" ) {
 	let exports = {};
 	let exportsObjName = `__xpo${ Math.random().toString().substring( 2 ) }__`;
-	if ( typeof code === 'function' ) code = `(${ Function.prototype.toString.call( code ) })(${ exportsObjName })`;
-	code = toCjs( code, exportsObjName, exports ) + `\n(${ Function.prototype.toString.call( setup ) })(self,${ exportsObjName },{})`;
+	if ( typeof code === 'function' ) code = `( ${ Function.prototype.toString.call( code ) } )( ${ exportsObjName } )`;
+	code = toCjs( code, exportsObjName, exports ) + `\n( ${ Function.prototype.toString.call( setup ) } )( self, ${ exportsObjName }, {} )`;
 	let url = URL.createObjectURL( new Blob( [ code ], { type: 'text/javascript' } ) ),
 		worker = new Worker( url, { type } ),
 		term = worker.terminate,
@@ -25,7 +31,7 @@ export default function workered ( code = defaultFunction, type = "classic" ) {
 		term.call( worker );
 	};
 	worker.call = ( method, params ) => new Promise( ( resolve, reject ) => {
-		let id = `rpc${ ++counter }`;
+		let id = `rpc${ ++counter } `;
 		callbacks[ id ] = [ resolve, reject ];
 		worker.postMessage( { type: 'RPC', id, method, params } );
 	} );
@@ -58,7 +64,7 @@ function setup ( ctx, rpcMethods, callbacks ) {
 		}
 		else {
 			let callback = callbacks[ id ];
-			if ( callback == null ) throw Error( `Unknown callback ${ id }` );
+			if ( callback == null ) throw Error( `Unknown callback ${ id } ` );
 			delete callbacks[ id ];
 			if ( data.error ) callback[ 1 ]( Error( data.error ) );
 			else callback[ 0 ]( data.result );
@@ -73,7 +79,7 @@ function toCjs ( code, exportsObjName, exports ) {
 	} );
 	code = code.replace( /^(\s*)export\s+((?:async\s*)?function(?:\s*\*)?|const|let|var)(\s+)([a-zA-Z$_][a-zA-Z0-9$_]*)/mg, ( s, before, type, ws, name ) => {
 		exports[ name ] = true;
-		return `${ before }${ exportsObjName }.${ name }=${ type }${ ws }${ name }`;
+		return `${ before }${ exportsObjName }.${ name }=${ type }${ ws }${ name } `;
 	} );
-	return `var ${ exportsObjName }={};\n${ code }\n${ exportsObjName };`;
+	return `var ${ exportsObjName } = {}; \n${ code } \n${ exportsObjName }; `;
 }

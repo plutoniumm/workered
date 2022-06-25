@@ -1,0 +1,1 @@
+export const function2string = ( func, name ) => func.toString().replace( 'function', `function ${ name }` )
