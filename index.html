@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Workerize Demo</title>
-</head>
+<title>Workerize Demo</title>
 
 <body>
-	<script scope="worker">
-		function asJson ( res ) {
-			return res.json();
-		}
-		export function get ( url ) {
-			return fetch( location.origin + '/' + url ).then( asJson );
-		}
-	</script>
 	<script type="module">
-		import workerize from './index.js';
+		import workered from './index.js';
 
-		const worker = workerize( `
+		const workee = workered( `
 				export function get(url) {
 					return fetch(location.origin+'/'+url).then(asJson);
 				}
 				function asJson(res) {
 					return res.json();
 				}
-			`, { type: 'module' } );
+			`, "module" );
 
-		worker.get( 'package.json' ).then( pkg => {
+		workee.get( 'package.json' ).then( pkg => {
 			console.log( 'Got package name: ', pkg );
+		} );
+	</script>
+
+	<script type="worker">
+		console.log('returning');
+
+		return 2;
+	</script>
+
+	<script type="module">
+		import workered from "./index.js";
+
+		const funcs = document.querySelector( 'script[type="worker"]' ).textContent;
+
+		const data = workered().run( funcs ).then( r => {
+			console.log( r );
 		} );
 	</script>
 </body>

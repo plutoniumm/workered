@@ -1,6 +1,6 @@
 {
-  "name": "workerize",
-  "version": "0.1.8",
+  "name": "workered",
+  "version": "1.0.0",
   "description": "Run a module in a Web Worker. And push custom functions",
   "source": "index.js",
   "repository": "plutoniumm/workered",
