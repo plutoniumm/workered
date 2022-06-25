@@ -1,30 +1,6 @@
-<h2 align="center">
-  💖 Using Webpack? You want <a href="https://github.com/developit/workerize-loader">workerize-loader ➡️</a>
-</h2>
+<h1>workered</h1>
 
-<img src="https://i.imgur.com/MBlHoDp.jpg" width="1358" alt="workerize">
-
-# Workerize [![npm](https://img.shields.io/npm/v/workerize.svg?style=flat)](https://www.npmjs.org/package/workerize) [![travis](https://travis-ci.org/developit/workerize.svg?branch=master)](https://travis-ci.org/developit/workerize)
-
-> Moves a module into a Web Worker, automatically reflecting exported functions as asynchronous proxies.
-
-- Bundles a tiny, purpose-built RPC implementation into your app
-- If exported module methods are already async, signature is unchanged
-- Supports synchronous and asynchronous worker functions
-- Works beautifully with async/await
-- Just **800 bytes** of gzipped ES3
-
-
-## Install
-
-```sh
-npm install --save workerize
-```
-
-
-### Usage
-
-Pass either a function or a string containing code.
+Based on [@developit/workerize-loader](https://github.com/developit/workerize-loader)
 
 **worker.js**:
 

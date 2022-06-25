@@ -1,0 +1,18 @@
+{
+    "extends": [
+        "config:base"
+    ],
+    "packageRules": [
+        {
+            "matchDepTypes": [
+                "devDependencies",
+                "dependencies"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "pin"
+            ],
+            "automerge": true
+        }
+    ]
+}

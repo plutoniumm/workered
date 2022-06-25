@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Workerize Demo</title>
+</head>
+
+<body>
+	<script scope="worker">
+		function asJson ( res ) {
+			return res.json();
+		}
+		export function get ( url ) {
+			return fetch( location.origin + '/' + url ).then( asJson );
+		}
+	</script>
+	<script type="module">
+		import workerize from './index.js';
+
+		const worker = workerize( `
+				export function get(url) {
+					return fetch(location.origin+'/'+url).then(asJson);
+				}
+				function asJson(res) {
+					return res.json();
+				}
+			`, { type: 'module' } );
+
+		worker.get( 'package.json' ).then( pkg => {
+			console.log( 'Got package name: ', pkg );
+		} );
+	</script>
+</body>
+
+</html>
