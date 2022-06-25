@@ -1,10 +1,9 @@
-const runner = async function run ( func = "return 1" ) {
+const defaultFunction = `
+export async function run( func = \"return 'Workered Working!'\" ) {
 	const eval2 = eval;
-	const data = await eval2( `(async ()=>{${ func }})()` );
+	const data = await eval2( \`(async ()=>{${ func }})()\` );
 	return data;
-};
-
-const defaultFunction = `export ${ runner.toString() }`;
+}`;
 
 export default function workered ( code = defaultFunction, type = "classic" ) {
 	let exports = {};

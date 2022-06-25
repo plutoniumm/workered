@@ -1,6 +1,6 @@
 {
   "name": "workered",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Run a module in a Web Worker. And push custom functions",
   "source": "index.js",
   "repository": "plutoniumm/workered",
@@ -10,7 +10,7 @@
     "build": "rollup -c",
     "git": "sh ./scripts/git.sh",
     "predeploy": "npm run build",
-    "deploy": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+    "deploy": "npm publish"
   },
   "license": "MIT",
   "dependencies": {

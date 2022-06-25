@@ -1,11 +1,15 @@
 # workered
 Based on [@developit/workerize-loader](https://github.com/developit/workerize-loader)
 
+```bash
+$ pnpm install workered
+```
+
 ## Direct Usage
 *With `export function`*
 
 ```js
-import workered from './index.js';
+import workered from 'workered';
 let worker = workered(`
 	export function add(a, b) {
 		// intensive function
@@ -25,7 +29,7 @@ let worker = workered(`
 When using with IIFE the `script` tag supports top level `await` and can be treated as such. The main objective here was to be able to run a whole function in an isolated scope and just return the value without being intensive
 
 ```js
-import workered from "./index.js";
+import workered from "workered";
 
 <script type="worker">
 	console.log('lolzies');
@@ -42,11 +46,12 @@ const data = workered().run( work ).then( r => {
 
 ## Utils
 ```js
-import {fetch} from "./utils.js";
+import {fetch} from "workered/utils";
 
 // coming soon
 ```
 
 ### License
 
+[MIT License](https://oss.ninja/mit/plutoniumm/) © [Jason Miller](https://ifactorial.com/me)
 [MIT License](https://oss.ninja/mit/developit/) © [Jason Miller](https://jasonformat.com)
