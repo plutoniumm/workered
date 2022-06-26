@@ -17,7 +17,7 @@ if ( !production ) {
     app.listen( PORT, () => console.log( "Running at " + PORT ) );
 }
 
-export default [ 'index', 'utils' ].map( e => {
+export default [ 'index', 'utils/index' ].map( e => {
     return {
         input: `./src/${ e }.js`,
         output: {

@@ -6,6 +6,7 @@ specifiers:
   express: 4.18.1
   rollup: 2.75.7
   rollup-plugin-terser: 7.0.2
+  wretch: ^1.7.10
 
 dependencies:
   '@rollup/plugin-commonjs': 22.0.1_rollup@2.75.7
@@ -13,6 +14,7 @@ dependencies:
   express: 4.18.1
   rollup: 2.75.7
   rollup-plugin-terser: 7.0.2_rollup@2.75.7
+  wretch: 1.7.10
 
 packages:
 
@@ -818,4 +820,8 @@ packages:
 
   /wrappy/1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
+    dev: false
+
+  /wretch/1.7.10:
+    resolution: {integrity: sha512-UgF2o63bZRsz3LoOxaxzAUdFdlIJzVYbCHHhQ+LNMSBD1FeFJn8ADaekopJclHUm6sN8Lhu0DQFGQloliS0Twg==}
     dev: false
